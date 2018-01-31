@@ -1,9 +1,24 @@
 package net.slipp.domain.users;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
 public class User {
+	@NotEmpty 
+	@Size(min=4, max=12)
 	private String userId;
+	
+	@NotEmpty 
+	@Size(min=4, max=12)
 	private String password;
+	
+	@NotEmpty
 	private String name;
+	
+	@Email
 	private String email;
 	
 	public User() {
