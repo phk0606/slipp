@@ -1,20 +1,19 @@
 package net.slipp.dao.users;
 
-import javax.annotation.PostConstruct;
-import javax.sql.DataSource;
+import javax.annotation.Resource;
 
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.jdbc.datasource.init.DatabasePopulatorUtils;
-import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
+import org.springframework.stereotype.Repository;
 
 import net.slipp.domain.users.User;
 
+@Repository("userDao")
 public class MybatisUserDao implements UserDao {
 	private static final Logger logger = LoggerFactory.getLogger(MybatisUserDao.class);
 	
+	@Resource(name="sqlSession")
 	private SqlSession sqlSession;	
 
 	public void setSqlSession(SqlSession sqlSession) {
