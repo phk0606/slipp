@@ -1,11 +1,12 @@
 package net.slipp.domain.users;
 
 import javax.validation.constraints.Email;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+import org.apache.ibatis.type.Alias;
+
+@Alias("user")
 public class User {
 	@NotEmpty 
 	@Size(min=4, max=12)

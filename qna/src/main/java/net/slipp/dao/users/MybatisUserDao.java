@@ -15,26 +15,12 @@ import net.slipp.domain.users.User;
 public class MybatisUserDao implements UserDao {
 	private static final Logger logger = LoggerFactory.getLogger(MybatisUserDao.class);
 	
-	private SqlSession sqlSession;
-	
-	private DataSource dataSource;
-	
-	@PostConstruct
-    public void initialize(){
-        ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
-        populator.addScript(new ClassPathResource("slipp.sql"));
-        DatabasePopulatorUtils.execute(populator, dataSource);
-        logger.info("database initialized sucess!");
-    }
-	
+	private SqlSession sqlSession;	
+
 	public void setSqlSession(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;
-	}
-	
-	public void setDataSource(DataSource dataSource) {
-		this.dataSource = dataSource;
-	}
-	
+	}	
+
 	@Override
 	public User findById(String userId) {
 		return sqlSession.selectOne("UserMapper.findById", userId);
