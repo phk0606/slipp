@@ -37,4 +37,29 @@ public class UserTest {
 		}
 	}
 
+	@Test
+	public void matchPassword() throws Exception{
+		String password = "password";
+		Authenticate authenticate = new Authenticate("userId", password);
+		User user = new User("userId", password, "name", "javajigi@slipp.net");
+		assertTrue(user.matchPassword(authenticate));
+		
+		authenticate = new Authenticate("userId", "password2");
+		assertFalse(user.matchPassword(authenticate));
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void updateWhenMisMatchUserId() throws Exception{
+		User user = new User("userId", "password", "name", "javajigi@slipp.net");
+		User updateUser = new User("user", "password", "sanjigi", "sanjigi@slipp.net");
+		user.update(updateUser);
+	}
+	
+	@Test
+	public void update() throws Exception{
+		User user = new User("userId", "password", "name", "javajigi@slipp.net");
+		User updateUser = new User("userId", "password", "sanjigi", "sanjigi@slipp.net");
+		User updatedUser = user.update(updateUser);
+		assertThat(updatedUser, is(updateUser));
+	}
 }
